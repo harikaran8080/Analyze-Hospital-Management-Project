@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Hospital.HospitalManagement.dto.DoctorDTO;
+import Hospital.HospitalManagement.entity.Doctor;
+import Hospital.HospitalManagement.enumeration.RequestType;
 import Hospital.HospitalManagement.response.ResponseGenerator;
 import Hospital.HospitalManagement.response.TransactionContext;
 import Hospital.HospitalManagement.service.DoctorService;
+import Hospital.HospitalManagement.validator.DoctorValidator;
 import Hospital.HospitalManagement.validator.ValidationResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +38,9 @@ public class AdminController {
 	@Autowired
 	private DoctorService doctorService;
 	
+	@Autowired
+	private DoctorValidator doctorValidator;
+	
 	@ApiOperation(value = "Allows to create Admin Controller")
 	@PostMapping(value = "/create",produces = "application/json")
 	public ResponseEntity<?>create(@ApiParam(value = "The Admin Controller request payload")@RequestBody DoctorDTO doctordto,
@@ -43,7 +49,11 @@ public class AdminController {
 		
 		TransactionContext context= generator.generateTransactionContext(headers);
 		
-		ValidationResult result=
+		ValidationResult result=doctorValidator.validate(RequestType.POST, doctordto);
+		
+		try {
+			doctorService.getByPhoneNo((Doctor)(ValidationResult.get))
+		}
 	}
 	
 	

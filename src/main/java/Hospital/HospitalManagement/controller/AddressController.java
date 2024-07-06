@@ -1,7 +1,7 @@
 package Hospital.HospitalManagement.controller;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ import lombok.NonNull;
 @AllArgsConstructor
 public class AddressController {
 	
-	private static final Logger LOGGER=Logger.getLogger(ResponseGenerator.class);
+	private static final Logger LOGGER=java.util.logging.Logger.getLogger(ResponseGenerator.class);
 	
 	private @NonNull ResponseGenerator responseGenerator;
 	
